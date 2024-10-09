@@ -1,0 +1,39 @@
+
+#card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.card {
+  margin: 10px;
+  text-align: center;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.card-footer {
+  font-weight: bold;
+}
+
+.text-body-secondary color-type-cat{
+  color: red;
+}
+
+.color-type-dog {
+  background-color: greenyellow;
+  color: green;
+}
+
+.color-type-cat {
+  background-color: lightskyblue;
+  color: darkblue;
+}
+
+.color-type-dino {
+  background-color: gold;
+  color: darkgoldenrod;
+}
