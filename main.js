@@ -1,3 +1,5 @@
+const cardContainer = document.getElementById("card-container")
+
 const pets = [
     {
       id: 1,
@@ -240,3 +242,41 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
+
+  
+  
+  //NEED TO ADD: check for type of pet to determine footer color (function?)
+  const colorType = (petType) => {
+    switch (petType) {
+      case "cat":
+        return "blue"
+      case "dog":
+        return "red"
+      case "dino":
+        return "yellow"
+      default:
+        return "green"
+      //now add color to an html element class and manipulate with CSS
+      //just take the type and add a css class based on it
+    }
+  }
+  //print the contents of each pets entry onto a Bootstrap card and send to DOM
+
+for (let i = 0; i < pets.length; i++) {
+  const petColor = colorType(pets[i].type)
+  cardContainer.innerHTML += `
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        ${pets[i].name}
+      </div>
+      <img src="${pets[i].imageUrl}" class="card-img-top" alt="${pets[i].name}">
+      <div class="card-body">
+        ${pets[i].color} <br>
+        ${pets[i].specialSkill}
+      </div>
+      <div class="card-footer text-body-secondary color-type-${pets[i].type}">
+        ${pets[i].type}
+      </div>
+    </div>
+  `
+}
