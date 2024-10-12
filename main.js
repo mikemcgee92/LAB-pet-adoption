@@ -245,7 +245,7 @@ const pets = [
 
   
   
-  //NEED TO ADD: check for type of pet to determine footer color (function?)
+  //TODO: check for type of pet to determine footer color (function?)
   const colorType = (petType) => {
     switch (petType) {
       case "cat":
