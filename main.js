@@ -1,5 +1,12 @@
+//DOM elements
 const cardContainer = document.getElementById("card-container")
 
+const btnAll = document.querySelector("#btn-all")
+const btnCats = document.querySelector("#btn-cats")
+const btnDogs = document.querySelector("#btn-dogs")
+const btnDinos = document.querySelector("#btn-dinos")
+
+//pet objects
 const pets = [
     {
       id: 1,
@@ -243,40 +250,72 @@ const pets = [
     }
   ];
 
-  
-  
-  //TODO: check for type of pet to determine footer color (function?)
-  const colorType = (petType) => {
-    switch (petType) {
-      case "cat":
-        return "blue"
-      case "dog":
-        return "red"
-      case "dino":
-        return "yellow"
-      default:
-        return "green"
-      //now add color to an html element class and manipulate with CSS
-      //just take the type and add a css class based on it
+//set up backup images for errors
+for (pet of pets) {
+  if (pet.type === "cat") {
+    pet.backupImg = "cat.jpg"
+  } else if (pet.type === "dog") {
+    pet.backupImg = "dog.jpg"
+  } else {
+    pet.backupImg = "dino.jpg"
+  }
+}
+
+//print the contents of each pets entry onto a Bootstrap card and send to DOM
+const render = (array) => {
+  //clear page
+  cardContainer.innerHTML = ""
+  //render cards
+  for (let i = 0; i < array.length; i++) {
+    cardContainer.innerHTML += `
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          ${array[i].name}
+        </div>
+        <img src="${array[i].imageUrl}" onerror="this.onerror=null;this.src='${array[i].backupImg}';" class="card-img-top img-thumbnail" alt="${array[i].name}" />
+        <div class="card-body">
+          ${array[i].color} <br>
+          ${array[i].specialSkill}
+        </div>
+        <div class="card-footer text-body-secondary color-type-${array[i].type}">
+          ${array[i].type}
+        </div>
+      </div>
+    `
+  }
+}
+
+
+//filter by type of pet, create new array
+const filter = (array, petsType) => {
+  const filterArray = []
+  for (pet of array) {
+    if (pet.type === petsType) {
+      filterArray.push(pet)
     }
   }
-  //print the contents of each pets entry onto a Bootstrap card and send to DOM
-
-for (let i = 0; i < pets.length; i++) {
-  const petColor = colorType(pets[i].type)
-  cardContainer.innerHTML += `
-    <div class="card" style="width: 18rem;">
-      <div class="card-header">
-        ${pets[i].name}
-      </div>
-      <img src="${pets[i].imageUrl}" class="card-img-top" alt="${pets[i].name}">
-      <div class="card-body">
-        ${pets[i].color} <br>
-        ${pets[i].specialSkill}
-      </div>
-      <div class="card-footer text-body-secondary color-type-${pets[i].type}">
-        ${pets[i].type}
-      </div>
-    </div>
-  `
+  //render the filtered array instead of the whole
+  render(filterArray)
 }
+
+//default landing page
+render(pets)
+
+//button event listeners
+btnAll.addEventListener("click", () => {
+  render(pets)
+})
+
+btnCats.addEventListener("click", () => {
+  filter(pets, "cat")
+})
+
+btnDogs.addEventListener("click",() => {
+  filter(pets, "dog")
+})
+
+btnDinos.addEventListener("click", () => {
+  filter(pets, "dino")
+})
+
+//TODO: ask why we need "() =>" in the event listener argument instead of being able to just call the function

@@ -9,6 +9,8 @@
 .card {
   margin: 10px;
   text-align: center;
+  border: pink solid 1px;
+  border-radius: 0%;
 }
 
 .card-header {
@@ -19,6 +21,12 @@
   font-weight: bold;
 }
 
+.img-thumbnail {
+  width: 75%;
+  align-self: center;
+  justify-self: center;
+}
+
 .color-type-dog {
   background-color: greenyellow;
   color: green !important;
@@ -26,10 +34,14 @@
 
 .color-type-cat {
   background-color: lightskyblue;
-  color: darkblue !important;
+  color: blue !important;
 }
 
 .color-type-dino {
   background-color: gold;
   color: darkgoldenrod !important;
+}
+
+.btn-group {
+  margin: 20px;
 }
