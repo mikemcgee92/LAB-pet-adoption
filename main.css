@@ -19,21 +19,17 @@
   font-weight: bold;
 }
 
-.text-body-secondary color-type-cat{
-  color: red;
-}
-
 .color-type-dog {
   background-color: greenyellow;
-  color: green;
+  color: green !important;
 }
 
 .color-type-cat {
   background-color: lightskyblue;
-  color: darkblue;
+  color: darkblue !important;
 }
 
 .color-type-dino {
   background-color: gold;
-  color: darkgoldenrod;
+  color: darkgoldenrod !important;
 }
