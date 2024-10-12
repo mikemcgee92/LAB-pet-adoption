@@ -274,8 +274,8 @@ const render = (array) => {
         </div>
         <img src="${array[i].imageUrl}" onerror="this.onerror=null;this.src='${array[i].backupImg}';" class="card-img-top img-thumbnail" alt="${array[i].name}" />
         <div class="card-body">
-          ${array[i].color} <br>
-          ${array[i].specialSkill}
+          <b>Color: </b>${array[i].color} <br>
+          <b>Special Skill: </b>${array[i].specialSkill}
         </div>
         <div class="card-footer text-body-secondary color-type-${array[i].type}">
           ${array[i].type}
