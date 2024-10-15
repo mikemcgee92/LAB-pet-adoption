@@ -3,6 +3,10 @@ body {
   flex-direction: column;
 }
 
+form {
+  align-self: center;
+}
+
 #card-container {
   display: flex;
   flex-direction: row;

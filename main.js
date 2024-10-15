@@ -5,6 +5,7 @@ const btnAll = document.querySelector("#btn-all")
 const btnCats = document.querySelector("#btn-cats")
 const btnDogs = document.querySelector("#btn-dogs")
 const btnDinos = document.querySelector("#btn-dinos")
+const btnNew = document.querySelector("#btn-new")
 
 //pet objects
 const pets = [
@@ -261,6 +262,14 @@ for (pet of pets) {
   }
 }
 
+
+/* ********************************* */
+/*          TODO:                    */
+/* 1. add user input form to create  */
+/* 2. add delete button              */
+/* ********************************* */
+
+
 //print the contents of each pets entry onto a Bootstrap card and send to DOM
 const render = (array) => {
   //clear page
@@ -277,6 +286,7 @@ const render = (array) => {
           <b>Color: </b>${array[i].color} <br>
           <b>Special Skill: </b>${array[i].specialSkill}
         </div>
+        <button type="button" class="btn btn-outline-danger" id="delete--${array[i].id}">Delete</button>
         <div class="card-footer text-body-secondary color-type-${array[i].type}">
           ${array[i].type}
         </div>
@@ -285,6 +295,72 @@ const render = (array) => {
   }
 }
 
+//add a new pet; handle the input form
+form = document.querySelector("form")
+
+//show form on button click
+const showForm = () => {
+  form.innerHTML = `
+  <div class="mb-3">
+      <label for="newPetName" class="form-label">Name</label>
+      <input type="text" class="form-control" id="newPetName">
+    </div>
+    <div class="mb-3">
+      <label for="newPetColor" class="form-label">Color</label>
+      <input type="text" class="form-control" id="newPetColor">
+    </div>
+    <div class="mb-3">
+      <label for="newPetSpecialSkill" class="form-label">Special Skill</label>
+      <input type="text" class="form-control" id="newPetSpecialSkill">
+    </div>
+    <div class="mb-3">
+      <select class="form-select" aria-label="Pet type" id="newPetType">
+        <option selected>Pet type</option>
+        <option value="cat">Cat</option>
+        <option value="dog">Dog</option>
+        <option value="dino">Dino</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="newPetImage" class="form-label">Image URL</label>
+      <input type="text" class="form-control" id="newPetImage">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  `
+}
+const clearForm = () => {
+  form.innerHTML = ""
+}
+
+const newPet = (e) => {
+  e.preventDefault(); //ALWAYS include this in a form to prevent page reloads
+
+  const newPetObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#newPetName").value,
+    color: document.querySelector("#newPetColor").value,
+    specialSkill: document.querySelector("#newPetSpecialSkill").value,
+    type: document.querySelector("#newPetType").value,
+    imageUrl: document.querySelector("#newPetImage").value,
+  };
+
+  pets.push(newPetObj);
+  render(pets);
+  form.reset();
+  clearForm();
+};
+//handle submit button
+form.addEventListener('submit', newPet)
+
+//delete a pet 
+cardContainer.addEventListener("click", (e) => {
+  if (e.target.id.includes("delete")) {
+    const [, id] = e.target.id.split("--"); // destructuring: https://github.com/orgs/nss-evening-web-development/discussions/11
+    const index = pets.findIndex((e) => e.id === Number(id));
+    pets.splice(index, 1);
+    render(pets)
+  }
+})
 
 //filter by type of pet, create new array
 const filter = (array, petsType) => {
@@ -316,6 +392,10 @@ btnDogs.addEventListener("click",() => {
 
 btnDinos.addEventListener("click", () => {
   filter(pets, "dino")
+})
+
+btnNew.addEventListener("click", () => {
+  showForm()
 })
 
 //TODO: ask why we need "() =>" in the event listener argument instead of being able to just call the function
